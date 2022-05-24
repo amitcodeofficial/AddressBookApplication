@@ -19,25 +19,14 @@ public class AddressBook {
     private int phoneNumber;
     private String email;
 
-    public AddressBook(String firstName, String lastName, String address, String city, String state, int zip, int phoneNumber, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-    }
-
     public AddressBook() {
     }
 
-    public int getId() {
+    public int getIdA() {
         return idA;
     }
 
-    public void setId(int idA) {
+    public void setIdA(int idA) {
         this.idA = idA;
     }
 
@@ -103,20 +92,5 @@ public class AddressBook {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "AddressBook{" +
-                "idA=" + idA +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", zip=" + zip +
-                ", phoneNumber=" + phoneNumber +
-                ", email='" + email + '\'' +
-                '}';
     }
 }

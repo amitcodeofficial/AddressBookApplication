@@ -1,6 +1,9 @@
 package com.bridgelab.addressbookapp.user.model;
 
 import com.bridgelab.addressbookapp.addressBook.model.AddressBook;
+import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,17 +20,8 @@ public class User {
     private String password;
     private long phoneNumber;
     @OneToMany(targetEntity = AddressBook.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "ua_fk",referencedColumnName = "id")
+    @JoinColumn(name = "userId_foreignKey",referencedColumnName = "id")
     private List<AddressBook> addressBookList = new ArrayList<AddressBook>();
-
-    public User(String firstName, String lastName, String email, String password, long phoneNumber, List<AddressBook> addressBookList) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.phoneNumber = phoneNumber;
-        this.addressBookList = addressBookList;
-    }
 
     public User() {
     }
@@ -86,18 +80,5 @@ public class User {
 
     public void setAddressBookList(List<AddressBook> addressBookList) {
         this.addressBookList = addressBookList;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", phoneNumber=" + phoneNumber +
-                ", addressBookList=" + addressBookList +
-                '}';
     }
 }
