@@ -20,7 +20,6 @@ public class User {
     private String password;
     private long phoneNumber;
     @OneToMany(targetEntity = AddressBook.class,cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId_foreignKey",referencedColumnName = "id")
     private List<AddressBook> addressBookList = new ArrayList<AddressBook>();
 
     public User() {

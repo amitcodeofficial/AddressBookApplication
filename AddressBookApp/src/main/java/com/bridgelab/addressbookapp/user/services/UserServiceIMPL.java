@@ -1,6 +1,7 @@
 package com.bridgelab.addressbookapp.user.services;
 
 import com.bridgelab.addressbookapp.addressBook.dao.AddressBookRepository;
+import com.bridgelab.addressbookapp.user.common.CustomException.*;
 import com.bridgelab.addressbookapp.user.dao.UserRepository;
 import com.bridgelab.addressbookapp.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,17 @@ public class UserServiceIMPL implements IUserService{
     }
 
     @Override
-    public String update(User user,int uId) {
+    public User getUserById(int id){
+        return userRepository.findById(id).orElseThrow(() -> new WrongIdException("User Id Not found "+id));
+    }
+
+    @Override
+    public String update(User user,int uId){
         User temp = userRepository.findById(uId).get();
         if(temp!=null){
             userRepository.save(user);
         }else{
-            return "User Id Not Found";
+            throw new WrongIdException("User Id Not Found "+uId);
         }
         return "Updated Successfully";
     }
@@ -44,7 +50,7 @@ public class UserServiceIMPL implements IUserService{
         if(tempU!=null){
             userRepository.deleteById(uId);
         }else{
-            return "Id Not Found";
+            throw new WrongIdException("User Id Not Found "+uId);
         }
         return "User Deleted Successfully";
     }
@@ -55,7 +61,7 @@ public class UserServiceIMPL implements IUserService{
         if(user!=null){
             addressBookRepository.deleteById(aId);
         }else{
-            return "Id Not Found";
+            throw new WrongIdException("User Id Not Found "+uId);
         }
         return "Address Deleted Successfully";
     }

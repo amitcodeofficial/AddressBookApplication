@@ -7,6 +7,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableWebMvc
+@EnableSwagger2
 public class AddressBookAppApplication {
 
     public static void main(String[] args) {

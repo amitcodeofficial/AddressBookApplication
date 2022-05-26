@@ -1,5 +1,6 @@
 package com.bridgelab.addressbookapp.user.controller;
 
+import com.bridgelab.addressbookapp.user.common.CustomException;
 import com.bridgelab.addressbookapp.user.dao.UserRepository;
 import com.bridgelab.addressbookapp.user.model.User;
 import com.bridgelab.addressbookapp.user.services.IUserService;
@@ -39,8 +40,14 @@ public class UserController {
         return new ResponseEntity<List<User>>(users, HttpStatus.OK);
     }
 
+    @GetMapping("/getUserById")
+    public ResponseEntity<User> getUserById(@RequestParam int id){
+        User user = iUserService.getUserById(id);
+        return new ResponseEntity<User>(user,HttpStatus.OK);
+    }
+
     @ApiOperation(value = "This service is used to update User data in API.",notes = "uId -> User Id Your Have to provide proper user id to update user data.")
-    @PostMapping("/update/{uId}")
+    @PutMapping("/update/{uId}")
     public ResponseEntity<String> update(@RequestBody User user, @PathVariable int uId){
         String updateMessage = iUserService.update(user,uId);
         return new ResponseEntity<String>(updateMessage,HttpStatus.OK);
@@ -58,12 +65,6 @@ public class UserController {
     public ResponseEntity<String> deleteAddress(@PathVariable int uId,@PathVariable int aId){
         String deleteAMessage = iUserService.deleteAddress(uId,aId);
         return new ResponseEntity<String>(deleteAMessage, HttpStatus.OK);
-    }
-
-    @GetMapping("/findByEmail")
-    public ResponseEntity<User> findByEmail(@RequestParam String email){
-        User userE = userRepository.findByEmail(email);
-        return new ResponseEntity<User>(userE,HttpStatus.OK);
     }
 
 }
